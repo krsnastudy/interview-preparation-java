@@ -1,0 +1,81 @@
+
+# 1. Namespace Definitions
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: prod
+---
+# 2. Deployment in 'dev' namespace
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-dev
+  namespace: dev
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+---
+# 3. Service in 'dev' namespace
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service-dev
+  namespace: dev
+spec:
+  selector:
+    app: nginx
+  ports:
+    - port: 80
+      targetPort: 80
+---
+# 4. Deployment in 'prod' namespace
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-prod
+  namespace: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+---
+# 5. Service in 'prod' namespace
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service-prod
+  namespace: prod
+spec:
+  selector:
+    app: nginx
+  ports:
+    - port: 80
+      targetPort: 80
