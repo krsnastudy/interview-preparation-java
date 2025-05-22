@@ -76,3 +76,68 @@ public static void main(String[] args) {
 }
 ```
 ---
+## Print Odd Even Numbers using Collectors.partitioningBy() API
+
+```java
+public static void main(String[] args) {
+
+    List<Integer> list =
+        IntStream.rangeClosed(1, 20)
+                 .mapToObj(i->i)
+                 .collect(Collectors.toList());
+
+//Collectors.partitioningBy
+    Map<Boolean, List<Integer>> map = 
+            list.stream()
+                .collect(Collectors.partitioningBy(i -> i % 2 == 0));
+
+//Printing
+    map.entrySet().stream().forEach(System.out::println);
+}
+
+/** OUTPUT **/
+ false=[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+ true=[2, 4, 6, 8, 10, 12, 14, 16, 18, 20]    
+
+/** Sum Of Odd Number Squares, Cubes **/
+Integer reduce = 
+        IntStream.rangeClosed(1, 1500)
+                 .boxed()
+                 .filter(i -> i % 2 != 0)
+                 .map(x -> x * x)
+                 .reduce(0, Integer::sum);
+
+Integer reduceSquare = IntStream.rangeClosed(1, 1500).boxed().filter(i -> i % 2 != 0).map(square).reduce(0, Integer::sum);
+Integer reduceCube = IntStream.rangeClosed(1, 1500).boxed().filter(i -> i % 2 != 0).map(cube).reduce(0, Integer::sum);
+```
+---
+
+## Group Anagrams
+
+```java
+public static Map<String, List<String>> groupAnagrams(List<String> words) {
+//	return words.stream().collect(Collectors.groupingBy(GroupAnagram::sortString));
+    return words.stream().collect(Collectors.groupingBy(w -> sortString(w)));
+}
+
+public static String sortString(String str) {
+    char[] charArr = str.toCharArray();
+    Arrays.sort(charArr);
+    return String.valueOf(charArr);
+}
+
+/*** String Anagram if two strings were given ***/
+public static boolean isAnagramSort(String string1, String string2) {
+    if (string1.length() != string2.length()) {
+        return false;
+    }
+    char[] a1 = string1.toCharArray();
+    char[] a2 = string2.toCharArray();
+    Arrays.sort(a1);
+    Arrays.sort(a2);
+
+//	return String.valueOf(a1).equals(String.valueOf(a2));
+    return Arrays.equals(a1, a2);
+}
+```
+---
