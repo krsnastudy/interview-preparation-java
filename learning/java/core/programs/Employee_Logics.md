@@ -6,7 +6,7 @@
 List<Employee> employeeList = new ArrayList<Employee>();
 List<Employee> empDet = new ArrayList<Employee>();
 ```
-Example **Employee Input Data**<br>
+Example **Employee Input Data**
 
     Employee [FirstName=Xubhurrutf, LastName=Mehwf, EmpNo=3760560, Salary=97316.98, Pincode=709528, Department=Travel],
     Employee [FirstName=Fbabcyfwpy, LastName=Affdb, EmpNo=7031070, Salary=79030.66, Pincode=923980, Department=Admin],
