@@ -8,11 +8,11 @@ List<Employee> empDet = new ArrayList<Employee>();
 ```
 Example **Employee Input Data**<br>
 
-    **Employee** [FirstName=Xubhurrutf, LastName=Mehwf, EmpNo=3760560, Salary=97316.98, Pincode=709528, Department=Travel],
-    **Employee** [FirstName=Fbabcyfwpy, LastName=Affdb, EmpNo=7031070, Salary=79030.66, Pincode=923980, Department=Admin],
-    **Employee** [FirstName=Wgyumefosg, LastName=Vhlfl, EmpNo=5206403, Salary=33073.92, Pincode=949561, Department=Admin],
-    **Employee** [FirstName=Rnruuhfzjw, LastName=Qtuch, EmpNo=2839314, Salary=83191.9, Pincode=837801, Department=Travel],
-    **Employee** [FirstName=Vfaoodasez, LastName=Ccenz, EmpNo=4086210, Salary=22609.938, Pincode=968451, Department=Travel]
+    Employee [FirstName=Xubhurrutf, LastName=Mehwf, EmpNo=3760560, Salary=97316.98, Pincode=709528, Department=Travel],
+    Employee [FirstName=Fbabcyfwpy, LastName=Affdb, EmpNo=7031070, Salary=79030.66, Pincode=923980, Department=Admin],
+    Employee [FirstName=Wgyumefosg, LastName=Vhlfl, EmpNo=5206403, Salary=33073.92, Pincode=949561, Department=Admin],
+    Employee [FirstName=Rnruuhfzjw, LastName=Qtuch, EmpNo=2839314, Salary=83191.9, Pincode=837801, Department=Travel],
+    Employee [FirstName=Vfaoodasez, LastName=Ccenz, EmpNo=4086210, Salary=22609.938, Pincode=968451, Department=Travel]
 
 ---
 
