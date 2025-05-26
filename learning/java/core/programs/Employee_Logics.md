@@ -1,6 +1,6 @@
 ## Employee List Questions
 
-- **Employee** :: Employee(String firstName, String lastName, int employeeNumber, float employeeSal, int employeePincode, DepartmentCode department)
+**Employee** :: Employee(String firstName, String lastName, int employeeNumber, float employeeSal, int employeePincode, DepartmentCode department)
 ```java
 // Populate Employee Data to employeeList
 List<Employee> employeeList = new ArrayList<Employee>();
@@ -13,10 +13,9 @@ Example **Employee Input Data**
     Employee [FirstName=Wgyumefosg, LastName=Vhlfl, EmpNo=5206403, Salary=33073.92, Pincode=949561, Department=Admin],
     Employee [FirstName=Rnruuhfzjw, LastName=Qtuch, EmpNo=2839314, Salary=83191.9, Pincode=837801, Department=Travel],
     Employee [FirstName=Vfaoodasez, LastName=Ccenz, EmpNo=4086210, Salary=22609.938, Pincode=968451, Department=Travel]
-
 ---
 
-- **Highest Salary**
+**Highest Salary**
 ```java
 // Highest Salary
 Employee highestSal = employeeList.stream().collect(Collectors.maxBy(Comparator.comparing(Employee::geteSal))).get();
@@ -24,14 +23,14 @@ Employee highestSal = employeeList.stream().max(Comparator.comparing(Employee::g
 ```
 ---
 
-- **Lowest Salary**
+**Lowest Salary**
 ```java
 Employee lowestSalary = employeeList.stream().collect(Collectors.minBy(Comparator.comparing(Employee::geteSal))).get();
 Employee lowestSalary = employeeList.stream().min(Comparator.comparing(Employee::geteSal)).get();
 ```
 ---
 
-- **Nth Highest Salary**
+**Nth Highest Salary**
 ```java
 int rank=2;
 Employee nthHighestSal = 
@@ -52,7 +51,7 @@ employeeList.stream()
 ```
 ---
 
-- **Sum of All Employees Salaries**
+**Sum of All Employees Salaries**
 ```java
 /**** Sum of Salary *****/
 Double sal = empDet.stream().filter(i->i.getEmpAge()<30).collect(Collectors.summingDouble(EmployeeExt::geteSal));
@@ -63,7 +62,7 @@ float s = empData.stream().map(m->m.geteSal()).reduce((float) 0, (a,b)->a+b);
 ```
 ---
 
-- **Employees Count By Gender**
+**Employees Count By Gender**
 ```java
 /**** Employees count by Gender ***/ 
   empDet.stream()
@@ -73,7 +72,7 @@ float s = empData.stream().map(m->m.geteSal()).reduce((float) 0, (a,b)->a+b);
 ```
 ---
 
-- **Employees Avg salary by Gender**
+**Employees Avg salary by Gender**
 ```java
 /*** Employees Avg salary by Gender ***/ 
   empDet.stream()
@@ -82,7 +81,7 @@ float s = empData.stream().map(m->m.geteSal()).reduce((float) 0, (a,b)->a+b);
 ```
 ---
 
-- **Department who‘s is salary greater than 10000**
+**Department who‘s is salary greater than 10000**
 ```java  
 /* Find the employee in each Department who‘s is salary greater than 10000 **/
         empDet.stream()
@@ -102,7 +101,7 @@ float s = empData.stream().map(m->m.geteSal()).reduce((float) 0, (a,b)->a+b);
 ```
 ---
 
-- **Print all the Employee Names by Gender**
+**Print all the Employee Names by Gender**
 ```java      
 /*** Print all the Employee Names by Gender ***/
 empDet.stream()
@@ -126,7 +125,7 @@ empDet.stream()
 ```
 ---
 
-- **Salary Filter in Range**
+**Salary Filter in Range**
 ```java
 /*** Salary in Range :: Print [EmpNumber-EmpSalary] Format ****/
 Predicate<Employee> salaryInRange50K = e -> e.geteSal() >= 50000;
@@ -142,7 +141,7 @@ employeeList.stream().filter(salaryInRange)
 ```
 ---
 
-- **Print Count of Employees by Dept Wise**
+**Print Count of Employees by Dept Wise**
 ```java
 /* Get Department Count */
 empData.stream()
@@ -151,7 +150,7 @@ empData.stream()
 ```
 ---
 
-- **Print salary summation Departmentwise**
+**Print salary summation Departmentwise**
 ```java
 /*** Department salary summation ***/
  empData.stream()
@@ -166,7 +165,7 @@ empData.stream()
 ```
 ---
 
-- **Print Highest Salary for Each Department**
+**Print Highest Salary for Each Department**
 ```java
 /* Departmentwise highest salary */
  empData.stream()
@@ -184,7 +183,7 @@ empData.stream()
  ```
 ---
 
-- **Sort Employee by two fields at a time**
+**Sort Employee by two fields at a time**
 ```java
 /* Sort Employees using Comparator */
 Comparator<Employee> comparator = 
@@ -196,7 +195,7 @@ empData.stream().distinct().sorted(comparator);
 ```
 ---
 
-- **Convert List to a Map**
+**Convert List to a Map**
 ```java
 /* Adding List to HashMap */
 Map<Object, Object> hMap = 
@@ -215,7 +214,7 @@ Map<Integer, Object> linkedHashMap =
 ```
 ---
 
-- **Fetch Employees whose name starts with "S"**
+**Fetch Employees whose name starts with "S"**
 ```java
 /*** Employees FirstName with S ***/
     emp.stream()
@@ -225,7 +224,7 @@ Map<Integer, Object> linkedHashMap =
 ```
 ---
 
-- **Fetch Employees who salary > 50K**
+**Fetch Employees who salary > 50K**
 ```java
 /*** Employees Salary > 50000 ***/
 ArrayList<Employee> eList = 
@@ -235,7 +234,7 @@ ArrayList<Employee> eList =
 ```
 ---
 
-- **Sorting Employees By firstName, lastName, Department**
+**Sorting Employees By firstName, lastName, Department**
 ```java
 /*** Sorting By firstName, lastName, Department ***/
 Comparator<Employee> empComparator = 
@@ -252,3 +251,6 @@ ArrayList<Employee> sorted =  (ArrayList<Employee>)
                     .collect(Collectors.toList());
 ```
 ---
+
+
+
