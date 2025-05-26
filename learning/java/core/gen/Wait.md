@@ -1,6 +1,3 @@
-Excellent and **very important Core Java interview question**!  
-This is a favorite for **Java concurrency and multithreading rounds**. Let's break it down clearly.
-
 ---
 
 # 🚀 Question:
