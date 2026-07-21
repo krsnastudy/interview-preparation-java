@@ -10,9 +10,31 @@ public static void main(String[] args) {
             .max(Comparator.comparing(Map.Entry::getValue))
             .get()
             .getKey();
-
     System.out.println("maxRepeatedKey: " + maxRepeatedKey);
 }
+    
+/* "What if two keys have the same frequency?" */
+    String result = Arrays.stream(input)
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+            .entrySet()
+            .stream()
+            .max(Comparator
+                    .comparing(Map.Entry<String, Long>::getValue)
+                    .thenComparing(Map.Entry::getKey, Comparator.reverseOrder()))
+            .get()
+            .getKey();
+    System.out.println(result);
+
+Senior Interview Tip : This is a favorite follow-up question for experienced Java developers. 
+        
+A strong answer is: 
+The current implementation is not deterministic when multiple elements have the same frequency because 
+Collectors.groupingBy() creates a HashMap, whose iteration order is unspecified. 
+To make the result deterministic, I'd add a secondary comparator (for example, by key) or use a LinkedHashMap 
+if I need to preserve insertion order.
+
+        .max(Comparator.comparing(Map.Entry<String, Long>::getValue)
+        .thenComparing(Map.Entry::getKey))
 ```
 ---
 ## Sort Elements in a Map by Key, Value
