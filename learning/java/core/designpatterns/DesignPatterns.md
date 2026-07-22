@@ -1,8 +1,9 @@
 ## **Creational Patterns (How objects are created):**
 1.	**Singleton**: Ensures that a class has only one instance and provides a global point of access to it.
-2.	**Factory Method**: Defines an interface for creating an object, but lets subclasses decide which class to instantiate. 3. Abstract Factory: Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
-3.	**Builder**: Separates the construction of a complex object from its representation so that the same construction process can create different representations.
-4.	**Prototype**: Specifies the kinds of objects to create using a prototypical instance, and creates new objects by copying this prototype.
+2.	**Factory Method**: Defines an interface for creating an object, but lets subclasses decide which class to instantiate. 
+3. **Abstract Factory**: Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+4. 	**Builder**: Separates the construction of a complex object from its representation so that the same construction process can create different representations.
+5.	**Prototype**: Specifies the kinds of objects to create using a prototypical instance, and creates new objects by copying this prototype.
 ---
 
 ## **Structural Patterns (How classes and objects are composed):**
