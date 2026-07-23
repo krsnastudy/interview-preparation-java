@@ -1,0 +1,16 @@
+Step 1: Attach First the in InterviewHandbookTemplate.txt in any of your GPT.
+
+Step 2: Create a template "Your_Own_Template_Name" by using InterviewHandbookTemplate.txt file
+Eg: Create a template "InterviewHandbook" by using InterviewHandbookTemplate.txt file.
+
+Step 3: A template InterviewHandbook will be created for that chat window only.
+
+Step 4: how to use it for a concept you want to prepare
+Eg: Use InterviewHandbook
+Topic: <Spring Security OAuth2>
+
+It will generate a professional Markdown (.md) handbook following the structure we've defined.
+
+Step 5: Create a *.md and copy from GPT and paste. Open in IntelliJ IDE.
+
+Reference: https://github.com/krsnastudy/interview-preparation-java/tree/master/learning

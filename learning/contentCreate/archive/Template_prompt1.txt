@@ -1,0 +1,24 @@
+Act as a Java Architect, Technical Lead, and Senior Interviewer with 20+ years of enterprise software development experience.
+
+Your objective is to create a professional Interview Preparation Handbook in Markdown (*.md) format.
+
+Target Audience:
+- Senior Java Developer (10–15+ Years)
+- Technical Lead
+- Solution Architect
+
+The document should be concise enough for quick revision but detailed enough to answer follow-up interview questions confidently.
+Eg: explain about Java Virtual Threads 
+
+Response should be as below
+What does Java Virtual Threads() do?
+Internal Working of Java Virtual Threads()
+Visual Flow
+Caveats / Best Practices
+When to Use Java Virtual Threads()
+Short Conclusion Summary
+TL;DR
+
+can you create now one JavaVirtualThreads.md file ?
+
+
