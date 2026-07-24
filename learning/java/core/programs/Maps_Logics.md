@@ -94,12 +94,20 @@ Output: Sort By Map.Entry::getKey : 9, 18, 11
 
     }
 ```
-Output::
 
-{Lohith=Jammu, Rakesh=Andhra, Arun Gowda=Karnataka, Vinay=Delhi, Mukesh=Assam}
+-**sortByValue**
+.sorted(Comparator.comparing(Map.Entry::getValue))
+.sorted(Map.Entry.comparingByValue())
+.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())) //Reverse Order Sorting
 
+-**sortByKey**
+.sorted(Comparator.comparing(Map.Entry::getKey))
+.sorted(Map.Entry.comparingByKey())
+.sorted(Map.Entry.comparingByKey(Comparator.reverseOrder())) //Reverse Order Sorting
+
+# **Output**::
+**GivenValue**: {Lohith=Jammu, Rakesh=Andhra, Arun Gowda=Karnataka, Vinay=Delhi, Mukesh=Assam}
 **sortByValue**: {Rakesh=Andhra, Mukesh=Assam, Vinay=Delhi, Lohith=Jammu, Arun Gowda=Karnataka}
-
 **sortByKey**: {Arun Gowda=Karnataka, Lohith=Jammu, Mukesh=Assam, Rakesh=Andhra, Vinay=Delhi}
 
 ---
