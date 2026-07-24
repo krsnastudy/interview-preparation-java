@@ -105,8 +105,7 @@ Output: Sort By Map.Entry::getKey : 9, 18, 11
 .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder())) //**Reverse Order Sorting**  
 
 ```text
-# **Output**::
-
+**Output**::  
 **GivenValue**: {Lohith=Jammu, Rakesh=Andhra, Arun Gowda=Karnataka, Vinay=Delhi, Mukesh=Assam}\
 **sortByValue**: {Rakesh=Andhra, Mukesh=Assam, Vinay=Delhi, Lohith=Jammu, Arun Gowda=Karnataka}\
 **sortByKey**: {Arun Gowda=Karnataka, Lohith=Jammu, Mukesh=Assam, Rakesh=Andhra, Vinay=Delhi}
