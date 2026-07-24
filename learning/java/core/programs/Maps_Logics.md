@@ -76,6 +76,7 @@ Output: Sort By Map.Entry::getKey : 9, 18, 11
         LinkedHashMap<String, String>
                 sortByValue = map.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())
+//                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())) //Reverse Order Sorting
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b) -> a, LinkedHashMap::new));
 
         System.out.println("sortByValue: " + sortByValue);
