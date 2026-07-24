@@ -1,0 +1,6 @@
+/******* Trace the complete end-to-end code flow **********/
+Act as a senior backend developer.
+In this microservices project please trace the complete end-to-end code flow for the [HTTP Method, e.g., POST] endpoint '[Endpoint URI, e.g., /api/v1/orders]'.
+Start from the Controller layer and trace down through the Request DTOs, Validation, Service layer, Security/Interceptors, Mapping, Repository/Data layer, and any outgoing Feign clients or Kafka events.
+Explain the role of each file involved in this specific request lifecycle.
+
