@@ -375,10 +375,12 @@ Provide a concise table.
 
 Write the exact answer a senior Java developer can speak during an interview in 30–60 seconds.
 
+---------------------------------------------------------
+
 ## Useful Resources information
 
 Provide top useful resources links to go through and learn.
-
+Add direct links and related top most YouTube link of language in general english whenever possible.
 
 =========================================================
 WRITING STYLE
