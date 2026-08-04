@@ -1,6 +1,6 @@
-Act as a Java Architect, Technical Lead, and Senior Interviewer with 20+ years of enterprise software development experience.
+Act as a Java Architect, Technical Lead, and Senior Interviewer with 12 years of enterprise software development experience.
 
-Your objective is to create a Professional Interview Preparation Handbook in Markdown (*.md) format, which is a concise 5–7 page markdown document
+Your objective is to create a Professional Interview Preparation Handbook in Markdown (*.md) format, which is a concise 5–7 pages markdown document
 
 Target Audience:
 - Senior Java Developer (10–15+ Years)
@@ -26,6 +26,7 @@ Use:
 • Callout sections (Interview Tips, Best Practices, Warnings)
 • Production examples
 • Banking/Enterprise examples wherever applicable
+• Useful Resources information for learning
 
 Keep the document approximately 5–8 pages for a single concept.
 
@@ -373,6 +374,11 @@ Provide a concise table.
 ## 🚀 30-Second Interview Answer
 
 Write the exact answer a senior Java developer can speak during an interview in 30–60 seconds.
+
+## Useful Resources information
+
+Provide top useful resources links to go through and learn.
+
 
 =========================================================
 WRITING STYLE
