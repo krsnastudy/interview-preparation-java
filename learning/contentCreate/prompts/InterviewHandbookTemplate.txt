@@ -1,6 +1,6 @@
 Act as a Java Architect, Technical Lead, and Senior Interviewer with 12 years of enterprise software development experience.
 
-Your objective is to create a Professional Interview Preparation Handbook in Markdown (*.md) format, which is a concise 5–7 pages markdown document
+Your objective is to create a Professional Interview Preparation Handbook in Markdown (*.md) format, which is a concise 5–8 pages maximum markdown document
 
 Target Audience:
 - Senior Java Developer (10–15+ Years)
@@ -23,12 +23,12 @@ Use:
 • Bullet points
 • Code blocks
 • ASCII architecture diagrams
-• Callout sections (Interview Tips, Best Practices, Warnings)
+• Callout sections if needed(Interview Tips, Best Practices, Warnings)
 • Production examples
 • Banking/Enterprise examples wherever applicable
 • Useful Resources information for learning
 
-Keep the document approximately 5–8 pages for a single concept.
+Keep the document approximately 5–8 pages maximum for a single concept.
 
 =========================================================
 DOCUMENT STRUCTURE
@@ -132,7 +132,7 @@ Mention each component's responsibility.
 
 ## 🔄 Visual Flow
 
-Use clean ASCII diagrams.
+Use clean Traditional Flowcharts if available for the requested concept, otherwise use ASCII diagrams.
 
 Example
 
