@@ -1,4 +1,4 @@
-Here’s a curated list of **frequently asked SQL queries** in **experienced-level interviews**, especially relevant for backend developers like you, Krishna. These cover key areas such as **joins, subqueries, aggregations, window functions, performance tuning, and real-world business logic**.
+Here’s a curated list of **frequently asked SQL queries** in **experienced-level interviews**, especially relevant for backend developers like you. These cover key areas such as **joins, subqueries, aggregations, window functions, performance tuning, and real-world business logic**.
 
 ---
 

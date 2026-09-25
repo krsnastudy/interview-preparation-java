@@ -1,4 +1,4 @@
-Great question, Krishna! Understanding **how authentication works internally in Spring Security** is **crucial for interviews**, especially at the experienced level.
+Understanding **how authentication works internally in Spring Security** is **crucial for interviews**, especially at the experienced level.
 
 Let’s break it down step by step with the **flow, components, real-world analogy, and interview angles**.
 
