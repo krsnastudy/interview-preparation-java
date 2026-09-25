@@ -192,6 +192,3 @@ Client → Request → DispatcherServlet → Checks Session → Create/Retrieve 
 > You can manually use `HttpSession`, or use **`@SessionAttributes`** (controller level), or **`@SessionScope`** (bean level) to manage session-scoped data easily.
 
 ---
-
-Would you also like me to show you an **example using Redis as session storage**? (Real-time scalable setup) 🚀  
-This is asked in senior-level Java interviews sometimes! 🌟
