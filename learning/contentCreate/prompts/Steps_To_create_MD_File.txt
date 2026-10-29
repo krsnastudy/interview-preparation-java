@@ -14,3 +14,13 @@ It will generate a professional Markdown (.md) handbook following the structure 
 Step 5: Create a *.md and copy from GPT and paste. Open in IntelliJ IDE.
 
 Reference: https://github.com/krsnastudy/interview-preparation-java/tree/master/learning
+
+/*************************/
+
+Use InterviewHandbook.md as a starting point for one topic at a time:
+1. Make a copy of the file.
+2. Replace [Topic Name] and other bracketed prompts with your topic and details.
+3. Replace the sample code and diagrams with examples that fit.
+4. Remove sections that genuinely don’t apply, and replace the example resource links with useful links for that topic.
+For SRE, a focused topic works better than trying to cover all of Site Reliability Engineering at once. 
+For example, make the handbook about SLOs, SLIs, and error budgets.
