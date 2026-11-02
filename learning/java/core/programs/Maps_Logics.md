@@ -96,7 +96,7 @@ Output: Sort By Map.Entry::getKey : 9, 18, 11
 **Sort Elements in a Map by Key, Value**
 ***sortByValue***  
 .sorted(Comparator.comparing(Map.Entry::getValue))  
-.sorted(Map.Entry.comparingByValue())
+.sorted(Map.Entry.comparingByValue())  
 .sorted(Map.Entry.<String, Long>comparingByValue())
 
 **Reverse Order Sorting**  
