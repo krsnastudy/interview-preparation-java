@@ -105,7 +105,7 @@ Output: Sort By Map.Entry::getKey : 9, 18, 11
 
 ***sortByKey***   
 .sorted(Map.Entry.comparingByKey())  
-.sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))   //**Reverse Order Sorting**
+.sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))   //**Reverse Order Sorting**  
 .sorted(Comparator.comparing(Map.Entry::getKey))  
 .sorted(Comparator.<Map.Entry<String, String>, String>comparing(Map.Entry::getKey).reversed()) //**Reverse Order Sorting**  
 
