@@ -73,6 +73,13 @@ public static void main(String[] args) {
             .map(m -> "[" + m + "]")
             .collect(Collectors.joining(", "));
     System.out.println(collect);
+
+    /** Simple Way ***/
+    Arrays.sort(sArray, Comparator.comparing(s-> s.split(" ")[1]));
+    System.out.println("Sorted :: "+Arrays.toString(sArray));
+
+    Arrays.sort(sArray, Comparator.comparing((String s)->s.split(" ")[1]).reversed());
+    System.out.println("Reverse:: "+Arrays.toString(sArray));
 }
 ```
 ---
