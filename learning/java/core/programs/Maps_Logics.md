@@ -116,9 +116,9 @@ Output: Sort By Map.Entry::getKey : 9, 18, 11
 **Common aggregation step (shared by all 4 options)**  
 **1)** .sorted(Comparator.<Map.Entry<String, Long>, String>comparing(Map.Entry::getKey).thenComparing(Map.Entry::getValue))  
 **2)** .sorted(Comparator.<Map.Entry<String, Long>, String>comparing(e -> e.getKey()).thenComparing(e -> e.getValue()))  
-**3)** Comparator<Map.Entry<String, Long>> byKey = Comparator.comparing(Map.Entry::getKey);  
-.sorted(byKey.thenComparing(Map.Entry::getValue))  
-**4)** .sorted(Map.Entry.<String, Long>comparingByKey().thenComparing(Map.Entry.comparingByValue()))  
+**3)** Comparator<Map.Entry<String, Long>> byKey = Comparator.comparing(Map.Entry::getKey);    
+**4)** .sorted(byKey.thenComparing(Map.Entry::getValue))  
+**5)** .sorted(Map.Entry.<String, Long>comparingByKey().thenComparing(Map.Entry.comparingByValue()))    
 
 ```text
 **Output** ::  
