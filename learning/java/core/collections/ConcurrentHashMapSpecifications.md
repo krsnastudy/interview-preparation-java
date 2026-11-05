@@ -92,5 +92,32 @@ public class ConcurrentHashMapExample {
 
 ---
 
-Would you also like me to show a **multi-threaded example** (`Thread-1` and `Thread-2` adding values concurrently into `ConcurrentHashMap`)?  
-(That's a nice touch to impress interviewers 🚀)
+here is a **multi-threaded example** (`Thread-1` and `Thread-2` adding values concurrently into `ConcurrentHashMap`)?  
+
+```java
+import java.util.concurrent.ConcurrentHashMap;
+
+public class ConcurrentMapExample {
+    public static void main(String[] args) throws InterruptedException {
+        ConcurrentHashMap<String, Integer> totals = new ConcurrentHashMap<>();
+
+        Thread thread1 = new Thread(() ->
+                totals.merge("total", 10, Integer::sum),
+                "Thread-1");
+
+        Thread thread2 = new Thread(() ->
+                totals.merge("total", 20, Integer::sum),
+                "Thread-2");
+
+        thread1.start();
+        thread2.start();
+
+        thread1.join();
+        thread2.join();
+
+        System.out.println("Total: " + totals.get("total")); // 30
+    }
+}
+```
+
+**merge** performs each update atomically, so both values contribute to the total. The printed total is `30` regardless of which thread runs first.
