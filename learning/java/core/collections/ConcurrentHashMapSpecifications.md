@@ -92,7 +92,7 @@ public class ConcurrentHashMapExample {
 
 ---
 
-here is a **multi-threaded example** (`Thread-1` and `Thread-2` adding values concurrently into `ConcurrentHashMap`)?  
+here is a **multi-threaded example** (`Thread-1` and `Thread-2` adding values concurrently into `ConcurrentHashMap`)  
 
 ```java
 import java.util.concurrent.ConcurrentHashMap;

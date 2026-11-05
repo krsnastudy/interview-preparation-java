@@ -50,5 +50,3 @@ list.set(0, "Z");       // Throws UnsupportedOperationException
 
 * Use `Arrays.asList()` when you need a fixed-size but mutable list (backed by array).
 * Use `List.of()` when you need an immutable, null-safe, and concise list in Java 9+.
-
-Do you want a code comparison or quiz-style practice question based on this?
