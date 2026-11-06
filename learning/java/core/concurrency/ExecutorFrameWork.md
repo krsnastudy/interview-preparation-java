@@ -184,7 +184,7 @@ ThreadPoolExecutor customPool = new ThreadPoolExecutor(
 
 # Java Executor Framework: interview notes
 
-The companion `ExecutorFrameworkInterviewDemo.java` is a single-file Java 21+ program. It demonstrates the common executor factories, a directly configured bounded `ThreadPoolExecutor`, task results with `Future`, and orderly shutdown.
+The companion `ExecutorFrameworkDemo.java` is a single-file Java 21+ program. It demonstrates the common executor factories, a directly configured bounded `ThreadPoolExecutor`, task results with `Future`, and orderly shutdown.
 
 ## The core idea
 
@@ -248,6 +248,23 @@ For high-concurrency workloads with many blocking operations, virtual threads ma
 
 **What should you measure before picking pool size?**
 Task type and service time, CPU count/utilization, blocking fraction, queue depth and wait time, rejection count, throughput, tail latency, and downstream capacity. `availableProcessors()` is a starting signal, not a universal sizing formula.
+
+**Yes.** Executors queue submitted tasks while the worker threads are busy, but the queue type and capacity depend on the executor. In Java 17’s standard implementations, the queues are:
+
+| Executor in the demo | Queue used | Maximum queued tasks |
+|---|---|---:|
+| `newFixedThreadPool(n)` | `LinkedBlockingQueue` | Effectively unbounded; its default capacity is `Integer.MAX_VALUE` |
+| `newSingleThreadExecutor()` | `LinkedBlockingQueue` | Effectively unbounded; its default capacity is `Integer.MAX_VALUE` |
+| `newCachedThreadPool()` | `SynchronousQueue` | **0 stored tasks**; each task must be handed directly to a worker, or a new worker is created |
+| `newScheduledThreadPool(n)` | `DelayedWorkQueue` | Unbounded |
+| `newWorkStealingPool(n)` | Fork/join work-stealing queues | No single shared queue or simple configured capacity; the pool uses multiple queues |
+| Custom `ThreadPoolExecutor` in the demo | `ArrayBlockingQueue<>(2)` | **2 tasks** |
+
+The fixed and single-thread factory methods use an unbounded queue, so tasks can accumulate if they arrive faster than workers process them. That can lead to high memory use. The cached pool’s `SynchronousQueue` doesn’t store tasks: it hands a task to a worker immediately, or the pool creates another worker. The [Java 17 `Executors` API](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/Executors.html) documents the standard factory behavior; the exact queue implementations come from the [OpenJDK implementation](https://code.googlesource.com/edge/openjdk/%2B/refs/heads/master/jdk/src/share/classes/java/util/concurrent/Executors.java).
+
+In the custom pool, the configuration is **2 core workers, up to 4 workers, and a queue of 2**. When all workers are busy and the queue is full, `CallerRunsPolicy` makes the thread submitting the task run it. This slows down submissions and provides basic backpressure. The [Java `ThreadPoolExecutor` docs](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ThreadPoolExecutor.html) describe how queueing, pool sizing, and rejection work together.
+
+One detail for interviews: `Integer.MAX_VALUE` is the queue’s theoretical capacity, not a practical guarantee that it can hold that many tasks—the process can run out of memory first.
 
 **Sample Code**
 https://github.com/krsnastudy/CoreJava/blob/master/src/com/prac/core/jdks/jdk5/threads/executor/ExecutorFrameworkDemo.java
