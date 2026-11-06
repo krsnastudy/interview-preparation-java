@@ -266,6 +266,6 @@ In the custom pool, the configuration is **2 core workers, up to 4 workers, and 
 
 One detail for interviews: `Integer.MAX_VALUE` is the queue’s theoretical capacity, not a practical guarantee that it can hold that many tasks—the process can run out of memory first.
 
-For more information, visit the code [Executor Framework Code](https://github.com/krsnastudy/CoreJava/blob/master/src/com/prac/core/jdks/jdk5/threads/executor/ExecutorFrameworkDemo.java){:target="_blank"}
+For more information, visit the code <a href="[https://bit.ly](https://github.com/krsnastudy/CoreJava/blob/master/src/com/prac/core/jdks/jdk5/threads/executor/ExecutorFrameworkDemo.java)" target="_blank">Executor Framework Code</a>
 
 ---
