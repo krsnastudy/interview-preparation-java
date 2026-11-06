@@ -249,7 +249,7 @@ For high-concurrency workloads with many blocking operations, virtual threads ma
 **What should you measure before picking pool size?**
 Task type and service time, CPU count/utilization, blocking fraction, queue depth and wait time, rejection count, throughput, tail latency, and downstream capacity. `availableProcessors()` is a starting signal, not a universal sizing formula.
 
-**Yes.** Executors queue submitted tasks while the worker threads are busy, but the queue type and capacity depend on the executor. In Java 17’s standard implementations, the queues are:
+Executors queue submitted tasks while the worker threads are busy, but the queue type and capacity depend on the executor. In Java 17’s standard implementations, the queues are:
 
 | Executor in the demo | Queue used | Maximum queued tasks |
 |---|---|---:|
@@ -266,5 +266,6 @@ In the custom pool, the configuration is **2 core workers, up to 4 workers, and 
 
 One detail for interviews: `Integer.MAX_VALUE` is the queue’s theoretical capacity, not a practical guarantee that it can hold that many tasks—the process can run out of memory first.
 
-**Sample Code**
-https://github.com/krsnastudy/CoreJava/blob/master/src/com/prac/core/jdks/jdk5/threads/executor/ExecutorFrameworkDemo.java
+For more information, visit the code [Executor Framework Code](https://github.com/krsnastudy/CoreJava/blob/master/src/com/prac/core/jdks/jdk5/threads/executor/ExecutorFrameworkDemo.java)
+
+---
