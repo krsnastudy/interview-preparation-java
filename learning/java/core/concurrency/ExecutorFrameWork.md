@@ -180,3 +180,74 @@ ThreadPoolExecutor customPool = new ThreadPoolExecutor(
 - **Thread Pools** optimize resource usage.
 - **`Future`** allows asynchronous result handling.
 - **Always shut down** `ExecutorService` to avoid leaks.
+
+
+# Java Executor Framework: interview notes
+
+The companion `ExecutorFrameworkInterviewDemo.java` is a single-file Java 21+ program. It demonstrates the common executor factories, a directly configured bounded `ThreadPoolExecutor`, task results with `Future`, and orderly shutdown.
+
+## The core idea
+
+The Executor framework separates **what work should run** (`Runnable` or `Callable`) from **how threads are created, scheduled, and managed** (`Executor` / `ExecutorService`). Instead of creating a raw `Thread` for every operation, submit tasks to an executor. `ExecutorService` adds lifecycle management, task submission, `Future` results, bulk operations, and termination waiting.
+
+## Pool comparison
+
+| Executor | Worker behavior | Good fit | Interview caveat |
+|---|---|---|---|
+| `newFixedThreadPool(n)` | At most `n` active workers; shared unbounded queue | Bounded concurrency for a known workload | The worker count is bounded, but the queue is not. A sustained producer overload can consume memory and increase latency. |
+| `newCachedThreadPool()` | Reuses idle workers and can create more as demand rises; idle workers time out | Many short-lived, intermittent tasks | No practical worker cap; bursts of blocked or slow tasks can create many platform threads. |
+| `newSingleThreadExecutor()` | One worker; tasks execute sequentially | Serialized updates or ordered background work | One slow task blocks all later tasks; its work queue is unbounded. |
+| `newScheduledThreadPool(n)` | Schedules delayed and periodic actions using `n` core workers | Timers, retries, periodic maintenance | A long-running scheduled task occupies a worker. Periodic tasks do not overlap with themselves. Handle exceptions so recurring work is not unintentionally suppressed. |
+| `newWorkStealingPool(p)` | Fork/join workers with work-stealing; order is not guaranteed | Many independent or recursively split CPU tasks | Not a drop-in ordered executor; common-pool-style parallelism is not a resource-isolation strategy. |
+| `ThreadPoolExecutor` configured directly | You choose core/max sizes, queue, keep-alive, factory, and rejection handler | Production workloads needing explicit capacity and overload behavior | Explain the queue and rejection policy; `maximumPoolSize` only comes into play after the queue fills. |
+| `newVirtualThreadPerTaskExecutor()` | Starts a virtual thread per task; no fixed worker pool | Large numbers of mostly-blocking I/O tasks | Java 21+. Virtual threads reduce the cost of waiting; they do not make CPU-bound work faster or eliminate the need to limit downstream resources. |
+
+The standard factory methods for fixed, cached, single, scheduled, and work-stealing executors are documented in the [Java `Executors` API](https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/concurrent/Executors.html). Virtual threads are documented in Oracle's [Java 21 virtual threads guide](https://docs.oracle.com/en/java/javase/21/core/virtual-threads.html).
+
+## `ThreadPoolExecutor` admission sequence
+
+When a task arrives, a `ThreadPoolExecutor` generally:
+
+1. Starts workers until `corePoolSize` is reached.
+2. Queues new tasks while the queue accepts them.
+3. If the queue is full, creates workers up to `maximumPoolSize`.
+4. If it cannot queue or create another worker, invokes the `RejectedExecutionHandler`.
+
+The demo uses a bounded `ArrayBlockingQueue` and `CallerRunsPolicy`. Under saturation, the submitting thread runs the task, which slows further submissions and provides a simple form of backpressure. Other standard policies include `AbortPolicy` (throw), `DiscardPolicy` (drop), and `DiscardOldestPolicy` (drop the queue head). Choose a policy based on whether loss, caller slowdown, or explicit failure is acceptable.
+
+## Task and result methods
+
+- `execute(Runnable)` is fire-and-forget; it has no returned result handle.
+- `submit(Runnable/Callable)` returns a `Future`. `get()` waits; for a `Callable`, it returns the value. Task failures are surfaced from `get()` as `ExecutionException`.
+- `invokeAll` submits a collection and waits for all results; returned futures correspond to input order, not completion order.
+- `invokeAny` returns one successful result and cancels unfinished tasks after success.
+- `schedule` runs once after a delay. `scheduleAtFixedRate` targets a cadence; `scheduleWithFixedDelay` waits the delay after one execution finishes.
+
+## Shutdown: a strong interview answer
+
+Call `shutdown()` when the executor is no longer needed. It rejects new tasks but lets accepted tasks finish. Wait with `awaitTermination`. If the deadline expires, call `shutdownNow()` to request interruption of active tasks and retrieve queued tasks that never started. Interruption is cooperative: task code should respond to `InterruptedException` or restore the interrupt flag, as `shortTask` does.
+
+Avoid relying on daemon threads or process exit to clean up pools. Unclosed executors can keep an application alive and leak resources. In Java 21+, `ExecutorService` is also `AutoCloseable`, so try-with-resources can be used when its close/wait behavior fits the application lifecycle.
+
+## Common interview questions
+
+**Why use an executor instead of creating threads directly?**
+It centralizes thread management, limits concurrency when configured to do so, supports queuing and lifecycle control, and provides result/cancellation abstractions.
+
+**Does a fixed thread pool bound memory?**
+No. The factory uses a shared unbounded queue. Bound the queue with a directly configured `ThreadPoolExecutor` and define what happens when saturated.
+
+**Difference between `execute` and `submit`?**
+`execute` accepts a `Runnable` and returns no result. `submit` returns a `Future`, enabling waiting, cancellation, result retrieval, and observing task exceptions.
+
+**What is the difference between `shutdown` and `shutdownNow`?**
+`shutdown` is graceful and accepts no new tasks while allowing submitted tasks to finish. `shutdownNow` makes a best-effort interruption request and returns tasks that never commenced; it cannot forcibly stop code that ignores interruption.
+
+**When choose virtual threads over a pool?**
+For high-concurrency workloads with many blocking operations, virtual threads make a thread-per-task programming style much cheaper. Keep explicit limits around scarce resources (database connections, remote-service quotas). Use a bounded platform-thread executor for CPU-bound concurrency and isolation.
+
+**What should you measure before picking pool size?**
+Task type and service time, CPU count/utilization, blocking fraction, queue depth and wait time, rejection count, throughput, tail latency, and downstream capacity. `availableProcessors()` is a starting signal, not a universal sizing formula.
+
+**Sample Code**
+https://github.com/krsnastudy/CoreJava/blob/master/src/com/prac/core/jdks/jdk5/threads/executor/ExecutorFrameworkDemo.java
