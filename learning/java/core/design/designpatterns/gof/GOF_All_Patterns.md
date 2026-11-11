@@ -1,10 +1,5 @@
 # GoF Design Patterns - Interview Explanations (23)
 
-One markdown note per pattern. Each follows the same layout: **one-liner -> problem -> structure -> real-life analogy -> code walkthrough (linked to the runnable demo) -> JDK/Spring usage -> interview Q&A -> pitfalls -> comparisons -> resources**.
-
-Run the code: `./run-all.sh` or `java src/<category>/<Name>Demo.java` from the project root.
-
-
 ## Creational - How objects get created
 
 | # | Pattern | One-liner | Demo |
