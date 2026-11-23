@@ -51,4 +51,60 @@ For each of your top 15 topics (HashMap, JVM/GC, Spring DI, transactions, micros
 
 If you have those three, the D-E-P-T-H template builds the whole answer on its own.
 
-I can turn this into a one-page printable cheat sheet, or run a mock interview where you answer and I give feedback against this template. Which would help more?
+---
+
+# ConcurrentHashMap in D-E-P-T-H format
+
+## The spoken answer (about 75 seconds)
+
+> **D (Define):** "`ConcurrentHashMap` is Java's thread-safe, high-performance map for concurrent access. Unlike `Hashtable` or `Collections.synchronizedMap`, it doesn't lock the whole map.
+>
+> **E (Explain why):** Those older options allow one thread at a time, so they become a bottleneck under load. In Java 8+, `ConcurrentHashMap` uses **lock-free reads**, **CAS** to insert into an empty bucket, and a `synchronized` block on only the **first node of the bucket** for other writes. So threads working on different buckets don't block each other. Resizing is also done cooperatively by multiple threads.
+>
+> **P (Practical example):** In our project we used it as an in-memory cache for reference data and for per-user rate-limit counters. Hundreds of request threads read it constantly, and only a few write. For counters we used `merge()` or `compute()` so each update was atomic.
+>
+> **T (Trade-offs):** It doesn't allow null keys or values. Iterators are weakly consistent, meaning they never throw `ConcurrentModificationException` but may not reflect the latest changes. Compound operations like check-then-put are not atomic unless I use `putIfAbsent`, `computeIfAbsent` or `merge`. And `size()` is only an estimate under concurrent updates.
+>
+> **H (Hand-off):** I can go into the Java 7 vs 8 internals or the resize mechanism if you'd like."
+
+## Highlights to land (the 12-year signals)
+
+| Point | Why it impresses |
+|---|---|
+| **Java 7 vs 8**: segment locking (16 segments) → bucket-level locking + CAS | Shows you know it evolved and why it's more scalable |
+| **Reads are lock-free** (volatile reads) | Explains why it's fast for read-heavy loads |
+| **Locks only the bucket's first node** | The core mechanism |
+| **Treeification** at 8 entries per bucket (when table size ≥ 64), with locking on the `TreeBin` | Detail that shows depth |
+| **No nulls**: `get()` returning null would be ambiguous (absent or null value?), and in a concurrent map you can't safely check with `containsKey` afterwards | The classic "why" follow-up |
+| **Atomic compound ops**: `putIfAbsent`, `computeIfAbsent`, `merge` | Shows you've avoided the check-then-act bug |
+
+## Real-life analogy
+
+A **bank with many tellers**:
+- `Hashtable` is one teller serving the entire bank, so everyone queues.
+- `ConcurrentHashMap` has many counters. Anyone can look at the notice board (reads) without waiting, and only customers using the *same counter* wait for each other.
+
+## Comparison table (good to keep in your head)
+
+| | HashMap | Hashtable / synchronizedMap | ConcurrentHashMap |
+|---|---|---|---|
+| Thread-safe | No | Yes (whole-map lock) | Yes (bucket-level) |
+| Concurrent reads | Unsafe | Blocked | Lock-free |
+| Null keys/values | Allowed | Not allowed (Hashtable) | Not allowed |
+| Iterator | Fail-fast | Fail-fast | Weakly consistent |
+
+## Traps interviewers set (be ready)
+
+1. **"Is `if (!map.containsKey(k)) map.put(k, v)` safe?"** No. Another thread can insert between the two calls. Use `putIfAbsent()` or `computeIfAbsent()`.
+2. **"Is `map.get()` then `map.put()` safe for incrementing a counter?"** No. Use `map.merge(key, 1, Integer::sum)`, or `LongAdder` values for very hot counters.
+3. **"Any danger in `computeIfAbsent`?"** Keep the function short and don't modify the same map inside it, because it holds the bucket lock and can deadlock or throw an exception.
+4. **"Does thread-safe mean the whole application is thread-safe?"** No. Each operation is atomic, but multi-step logic across operations still needs its own coordination.
+5. **"Why not `synchronized` on a `HashMap`?"** It serialises all access, so throughput collapses under contention.
+
+## Likely follow-up questions
+
+- **"How does `size()` work?"** It sums per-cell counters (the same idea as `LongAdder`), so it's an approximation while writes are happening.
+- **"What is the default concurrency level in Java 8?"** The `concurrencyLevel` parameter is now only a sizing hint. Real concurrency comes from the number of buckets.
+- **"When would you *not* use it?"** For single-threaded code (use `HashMap`), or when you need strict multi-key atomicity (use explicit locks or a different structure).
+
+Want me to do the same D-E-P-T-H breakdown for another topic, such as HashMap internals, `synchronized` vs `ReentrantLock`, or Spring transaction propagation? Or I can pick up the gRPC project I started earlier.
